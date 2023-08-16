@@ -1,5 +1,12 @@
+import DatePicker from "./Components/DatePicker";
+
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <DatePicker />
+    </>
+  );
 }
 
 export default App;

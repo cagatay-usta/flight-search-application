@@ -24,12 +24,12 @@ function DatePicker({ oneWay, label }: DateProps) {
 
   const placeholder = selected ? format(selected, "P") : format(today, "P");
   const disabledStyle = oneWay
-    ? `bg-slate-300 pt-6 pb-4 pr-12 px-2 text-slate-100`
+    ? `bg-slate-300 pt-6 pb-4 pr-12 px-2 text-slate-100 `
     : `bg-white pt-6 pb-4 pr-12 px-2`;
 
   return (
     <div className="input-container flex-col flex relative">
-      <p className={`absolute  left-[.4rem] ${oneWay && "text-slate-100"}`}>
+      <p className={`absolute left-[.4rem] ${oneWay && "text-slate-100"}`}>
         {label}
       </p>
       <p className={disabledStyle} onClick={() => setOpen(!open)}>

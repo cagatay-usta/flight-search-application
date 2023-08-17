@@ -1,10 +1,9 @@
-import DatePicker from "./Components/DatePicker";
-
+import SearchBox from "./Components/SearchBox";
 
 function App() {
   return (
     <>
-      <DatePicker />
+      <SearchBox />
     </>
   );
 }

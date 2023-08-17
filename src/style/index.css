@@ -1,0 +1,10 @@
+@import "preflight.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* day-picker component customization */
+button.rdp-button_reset.rdp-button.rdp-day.rdp-day_selected {
+  background-color: antiquewhite;
+}

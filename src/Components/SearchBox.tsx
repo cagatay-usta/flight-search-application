@@ -1,8 +1,8 @@
-import { useState } from "react";
+import {useSearchContext} from "../Contexts/SearchContext";
 import DatePicker from "./DatePicker";
 
 function SearchBox() {
-  const [oneWay, setOneWay] = useState(false);
+  const {oneWay, setOneWay} = useSearchContext();
 
   return (
     <>

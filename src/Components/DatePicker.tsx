@@ -2,9 +2,11 @@ import { add, format } from "date-fns";
 import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { useSearchContext } from "../Contexts/SearchContext";
 
 /*
-Date picker component that allows the range from "today" up to a year later.
+Date picker component that allows the range from "today" up to a year later for departure,
+and automatically blocks return dates that are before departure date.
 */
 
 interface DateProps {
@@ -13,16 +15,19 @@ interface DateProps {
 }
 
 function DatePicker({ oneWay, label }: DateProps) {
+  const dateType = label.toLowerCase();
   const today = new Date();
-  const [selected, setSelected] = useState<Date | undefined>(today);
+  const { dates, handleDates } = useSearchContext();
   const [open, setOpen] = useState(false);
 
   const handleDaySelect = (date: Date | undefined) => {
-    setSelected(date);
+    handleDates(date, dateType);
     setOpen(false);
   };
+  let placeholder = dates.depart && format(dates.depart, "P");
+  if (dateType == "return")
+    placeholder = dates.return ? format(dates.return, "P") : format(today, "P");
 
-  const placeholder = selected ? format(selected, "P") : format(today, "P");
   const disabledStyle = oneWay
     ? `bg-slate-300 pt-6 pb-4 pr-12 px-2 text-slate-100 `
     : `bg-white pt-6 pb-4 pr-12 px-2`;
@@ -39,9 +44,9 @@ function DatePicker({ oneWay, label }: DateProps) {
         <DayPicker
           mode="single"
           numberOfMonths={2}
-          selected={selected}
+          selected={dateType == "return" ? dates.return : dates.depart}
           onSelect={handleDaySelect}
-          fromDate={today}
+          fromDate={dateType == "return" ? dates.depart : today}
           toDate={add(today, { years: 1 })}
           className="absolute -left-48 top-16 bg-slate-500 text-white p-6 rounded-xl"
         />

@@ -1,11 +1,14 @@
 import SearchBox from "./Components/SearchBox";
+import {SearchContextProvider} from "./Contexts/SearchContext";
 
 function App() {
   return (
     <>
-      <main>
-        <SearchBox />
-      </main>
+      <SearchContextProvider>
+        <main>
+          <SearchBox />
+        </main>
+      </SearchContextProvider>
     </>
   );
 }

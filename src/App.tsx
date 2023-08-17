@@ -3,7 +3,9 @@ import SearchBox from "./Components/SearchBox";
 function App() {
   return (
     <>
-      <SearchBox />
+      <main className="flex justify-center items-center h-screen">
+        <SearchBox />
+      </main>
     </>
   );
 }

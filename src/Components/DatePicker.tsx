@@ -33,7 +33,7 @@ function DatePicker({ oneWay = false, label }: DateProps) {
     : `bg-white pt-6 pb-4 pr-12 px-2`;
 
   return (
-    <div className="input-container flex-col flex relative">
+    <div className="input-container flex-col flex relative flex-grow flex-shrink">
       <p className={`absolute left-[.4rem] ${oneWay && "text-slate-100"}`}>
         {label}
       </p>

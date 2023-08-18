@@ -3,8 +3,8 @@ import { useSearchContext } from "../Contexts/SearchContext";
 function OneWayBox() {
   const { oneWay, setOneWay } = useSearchContext();
   return (
-    <div className="input-container flex shrink-0 w-32 items-center bg-white  p-[.5rem]">
-      <label htmlFor="one-way" className="relative -top-[8px]">
+    <div className="input-container flex shrink-0 flex-grow w-32 h-16 items-center justify-around bg-white  p-[.5rem]">
+      <label htmlFor="one-way">
         One-way Flight
       </label>
       <input

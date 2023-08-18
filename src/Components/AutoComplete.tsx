@@ -25,7 +25,7 @@ function AutoComplete({ id }: AutoCompleteProps) {
     setSuggestions(filtered);
   }
   return (
-    <div className="relative">
+    <div className="relative flex-grow flex-shrink">
       <div className="input-container flex-col flex">
         <label htmlFor={id} className="absolute left-[.4rem] capitalize">
           {id}
@@ -40,7 +40,7 @@ function AutoComplete({ id }: AutoCompleteProps) {
         />
       </div>
       {suggestions.length > 0 && (
-        <ul className="absolute bg-gray-200 flex flex-col gap-1 border-2 rounded-xl shadow-xl border-white  text-sky-900 top-[4.2rem] left-1 w-48 p-2 cursor-pointer">
+        <ul className="absolute bg-gray-200 flex flex-col gap-1 border-2 rounded-xl shadow-xl border-white  text-sky-900 top-[4.2rem] left-1 w-48 p-2 cursor-pointer z-10">
           {suggestions.map((item, index) => {
             return (
               <li

@@ -10,11 +10,11 @@ and automatically blocks return dates that are before departure date.
 */
 
 interface DateProps {
-  oneWay: boolean;
+  oneWay?: boolean;
   label: string;
 }
 
-function DatePicker({ oneWay, label }: DateProps) {
+function DatePicker({ oneWay = false, label }: DateProps) {
   const dateType = label.toLowerCase();
   const today = new Date();
   const { dates, handleDates } = useSearchContext();

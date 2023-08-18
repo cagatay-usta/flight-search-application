@@ -1,5 +1,6 @@
 import {useSearchContext} from "../Contexts/SearchContext";
 import DatePicker from "./DatePicker";
+import AutoComplete from "./AutoComplete";
 
 function SearchBox() {
   const {oneWay, setOneWay} = useSearchContext();
@@ -8,15 +9,7 @@ function SearchBox() {
     <>
       <div className="search-box-container flex justify-center gap-1 bg-sky-900 text-gray-600 p-16 items-center">
         <div className="input-container flex-col flex relative ">
-          <label htmlFor="from" className="absolute  left-[.4rem]">
-            From
-          </label>
-          <input
-            type="text"
-            className="pt-6 pb-4 px-2 rounded-l-xl"
-            placeholder="Country, city or airport"
-            id="from"
-          />
+          <AutoComplete id="from"/>
         </div>
         <div className="input-container flex-col flex relative">
           <label htmlFor="to" className="absolute  left-[.4rem]">

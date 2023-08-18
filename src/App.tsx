@@ -1,3 +1,4 @@
+import FlightDisplay from "./Components/FlightDisplay";
 import SearchBox from "./Components/SearchBox";
 import {SearchContextProvider} from "./Contexts/SearchContext";
 
@@ -7,6 +8,7 @@ function App() {
       <SearchContextProvider>
         <main>
           <SearchBox />
+          <FlightDisplay />
         </main>
       </SearchContextProvider>
     </>

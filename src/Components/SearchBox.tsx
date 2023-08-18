@@ -30,7 +30,7 @@ function SearchBox() {
           />
         </div>
         <div className="input-container flex w-32 items-center bg-white  p-[.5rem]">
-          <label htmlFor="one-way">One-way Flight</label>
+          <label htmlFor="one-way" className="relative -top-[8px]">One-way Flight</label>
           <input
             type="checkbox"
             id="one-way"
@@ -44,7 +44,7 @@ function SearchBox() {
         <DatePicker label="Return" oneWay={oneWay} />
         <button
           type="button"
-          className="rounded-r-lg p-5 px-7 bg-sky-600 text-white font-bold"
+          className="rounded-r-lg p-[1.275rem] px-7 bg-sky-600 text-white font-bold"
         >
           Search
         </button>

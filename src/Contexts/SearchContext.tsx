@@ -1,5 +1,13 @@
 /* eslint-disable react-refresh/only-export-components */
-import { ReactNode, createContext, useContext, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
+import { SearchParams } from "../Modules/mockAPI";
+import { dateToString } from "../Modules/utils";
 
 type SearchProviderProps = {
   children: ReactNode;
@@ -15,6 +23,13 @@ type Dates = {
   return?: Date | undefined;
 };
 
+type ValidationError = {
+  emptyFrom: boolean;
+  emptyTo: boolean;
+  departBigger: boolean;
+  samePort: boolean;
+};
+
 type SearchContext = {
   oneWay: boolean;
   setOneWay: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,7 +38,10 @@ type SearchContext = {
   handleDestination: (destination: string, label: string) => void;
   handleDates: (date: Date | undefined, label: string) => void;
   displayFlights: boolean;
-  handleFlightDisplay: () => void;
+  searchParams: SearchParams;
+  handleSearchParams: () => void;
+  validationAlert: ValidationError;
+  errorMessage: string;
 };
 
 const SearchContext = createContext({} as SearchContext);
@@ -44,7 +62,10 @@ export function SearchContextProvider({ children }: SearchProviderProps) {
     });
   }
 
-  const [dates, setDates] = useState<Dates>({ depart: new Date() });
+  const [dates, setDates] = useState<Dates>({
+    depart: new Date(),
+    return: new Date(),
+  });
   const [oneWay, setOneWay] = useState(false);
 
   function handleDates(date: Date | undefined, label: string) {
@@ -55,12 +76,87 @@ export function SearchContextProvider({ children }: SearchProviderProps) {
 
   const [displayFlights, setDisplayFlights] = useState<boolean>(false);
 
-  function handleFlightDisplay() {
-    if (destination.from && destination.to) setDisplayFlights(true);
-    console.log(destination.from);
-    console.log(destination.to);
-    console.log(displayFlights);
+  const [searchParams, setSearchParams] = useState<SearchParams>({
+    from: "",
+    to: "",
+    depart: "",
+  });
+
+  const [validationAlert, setValidationAlert] = useState<ValidationError>({
+    emptyFrom: false,
+    emptyTo: false,
+    departBigger: false,
+    samePort: false,
+  });
+
+  function handleSearchParams() {
+    if (!destination.from) {
+      setValidationAlert((prevState) => {
+        return { ...prevState, emptyFrom: true };
+      });
+      return;
+    }
+    setValidationAlert((prevState) => {
+      return { ...prevState, emptyFrom: false };
+    });
+    if (!destination.to) {
+      setValidationAlert((prevState) => {
+        return { ...prevState, emptyTo: true };
+      });
+      return;
+    }
+    setValidationAlert((prevState) => {
+      return { ...prevState, emptyTo: false };
+    });
+    if (!dates.depart) {
+      return;
+    }
+    if (destination.from === destination.to) {
+      setValidationAlert((prevState) => {
+        return { ...prevState, samePort: true };
+      });
+      return;
+    }
+    setValidationAlert((prevState) => {
+      return { ...prevState, samePort: false };
+    });
+    if (dates.return && dates.return.getTime() < dates.depart.getTime()) {
+      setValidationAlert((prevState) => {
+        return { ...prevState, departBigger: true };
+      });
+      return;
+    }
+    setValidationAlert((prevState) => {
+      return { ...prevState, departBigger: false };
+    });
+
+    const depart = dateToString(dates.depart);
+    setSearchParams({
+      from: destination.from,
+      to: destination.to,
+      depart: depart,
+    });
+
+    setDisplayFlights(true);
   }
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    let updatedError = "";
+    if (validationAlert.emptyFrom) {
+      updatedError = "Please select a valid departure destination.";
+    } else if (validationAlert.emptyTo) {
+      updatedError = "Please select a valid arrival destination.";
+    } else if (validationAlert.departBigger) {
+      updatedError = "Departure date cannot be later than return date.";
+    } else if (validationAlert.samePort) {
+      updatedError = "Departure and arrival airports cannot be the same.";
+    }
+    setErrorMessage(updatedError);
+  }, [validationAlert]);
+
+
 
   return (
     <SearchContext.Provider
@@ -72,7 +168,10 @@ export function SearchContextProvider({ children }: SearchProviderProps) {
         dates,
         handleDates,
         displayFlights,
-        handleFlightDisplay,
+        searchParams,
+        handleSearchParams,
+        validationAlert,
+        errorMessage,
       }}
     >
       {children}

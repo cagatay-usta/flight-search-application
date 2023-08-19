@@ -3,9 +3,9 @@ import { useSearchContext } from "../Contexts/SearchContext";
 function OneWayBox() {
   const { oneWay, setOneWay } = useSearchContext();
   return (
-    <div className="input-container flex shrink-0 flex-grow w-32 h-16 items-center justify-around bg-white  p-[.5rem]">
-      <label htmlFor="one-way">
-        One-way Flight
+    <div className="input-container flex shrink-0 flex-grow w-32 min-w-[205px] h-[4.5rem] items-center justify-around bg-white  pl-2 ">
+      <label htmlFor="one-way" className=" flex flex-col" >
+        One-way <span>Flight</span>
       </label>
       <input
         type="checkbox"

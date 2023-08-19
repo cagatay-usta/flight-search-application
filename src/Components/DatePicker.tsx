@@ -17,8 +17,11 @@ interface DateProps {
 function DatePicker({ oneWay = false, label }: DateProps) {
   const dateType = label.toLowerCase();
   const today = new Date();
-  const { dates, handleDates } = useSearchContext();
+  const { dates, handleDates, validationAlert } = useSearchContext();
   const [open, setOpen] = useState(false);
+
+  let border = "border-white";
+  if (validationAlert.departBigger) border = "border-red-400";
 
   const handleDaySelect = (date: Date | undefined) => {
     handleDates(date, dateType);
@@ -33,11 +36,14 @@ function DatePicker({ oneWay = false, label }: DateProps) {
     : `bg-white pt-6 pb-4 pr-12 px-2`;
 
   return (
-    <div className="input-container flex-col flex relative flex-grow flex-shrink">
+    <div className="input-container flex-col flex relative flex-grow flex-shrink min-w-[205px]">
       <p className={`absolute left-[.4rem] ${oneWay && "text-slate-100"}`}>
         {label}
       </p>
-      <p className={disabledStyle} onClick={() => setOpen(!open)}>
+      <p
+        className={`${disabledStyle} border-4 ${border}`}
+        onClick={() => setOpen(!open)}
+      >
         {placeholder}
       </p>
       {open && !oneWay && (

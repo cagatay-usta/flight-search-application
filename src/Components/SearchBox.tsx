@@ -8,8 +8,8 @@ function SearchBox() {
   const { oneWay } = useSearchContext();
   return (
     <>
-      <div className="flex justify-center bg-sky-900">
-        <div className="search-box-container flex flex-wrap justify-center w-4/5 gap-1  text-gray-600 p-16 items-center">
+      <div className="flex justify-center  bg-sky-900">
+        <div className="search-box-container flex flex-wrap justify-center gap-1  text-gray-600 p-16 items-center">
           <AutoComplete id="from" />
           <AutoComplete id="to" />
           <OneWayBox />

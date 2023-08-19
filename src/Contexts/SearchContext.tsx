@@ -60,6 +60,16 @@ export function SearchContextProvider({ children }: SearchProviderProps) {
     setDestination((prevState) => {
       return { ...prevState, [label]: destination };
     });
+    if (label === "from") {
+      setValidationAlert((prevState) => {
+        return { ...prevState, emptyFrom: false };
+      });
+    }
+    if (label === "to") {
+      setValidationAlert((prevState) => {
+        return { ...prevState, emptyTo: false };
+      });
+    }
   }
 
   const [dates, setDates] = useState<Dates>({
@@ -155,8 +165,6 @@ export function SearchContextProvider({ children }: SearchProviderProps) {
     }
     setErrorMessage(updatedError);
   }, [validationAlert]);
-
-
 
   return (
     <SearchContext.Provider

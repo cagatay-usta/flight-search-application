@@ -17,7 +17,12 @@ function AutoComplete({ id }: AutoCompleteProps) {
   const [value, setValue] = useState("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [validationError, setValidationError] = useState<string | null>(null);
-  const { handleDestination } = useSearchContext();
+  const { handleDestination, validationAlert } = useSearchContext();
+
+  let border = "border-white";
+  if (validationError || validationAlert.samePort) border = "border-red-400";
+  if (id === "from" && validationAlert.emptyFrom) border = "border-red-400";
+  if (id === "to" && validationAlert.emptyTo) border = "border-red-400";
 
   function handleClick(item: string) {
     setValue(item);
@@ -43,6 +48,7 @@ function AutoComplete({ id }: AutoCompleteProps) {
     });
     setSuggestions(filtered);
   }
+
   return (
     <div className="relative flex-grow flex-shrink">
       <div className="input-container flex-col flex ">
@@ -53,7 +59,7 @@ function AutoComplete({ id }: AutoCompleteProps) {
           type="text"
           className={`pt-6 pb-4 px-2  ${
             id == "from" && "rounded-l-xl"
-          } border-4 ${validationError ? "border-red-400" : "border-white"}`}
+          } border-4 ${border}`}
           placeholder="Country, city or airport"
           id={id}
           value={value}

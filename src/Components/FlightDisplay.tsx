@@ -1,17 +1,20 @@
+import { useSearchContext } from "../Contexts/SearchContext";
 import { useMockFetch, SearchParams } from "../Modules/mockAPI";
 import { formatTime, usd } from "../Modules/utils";
 
 function FlightDisplay() {
-  const mockSearchParams: SearchParams = {
-    from: "IST (Istanbul)",
-    to: "AYT (Antalya)",
+  const { destination } = useSearchContext();
+
+  const searchParams: SearchParams = {
+    from: destination.from,
+    to: destination.to,
     depart: "25.10.2023",
   };
+
   const { flightData, error, loading, match } = useMockFetch(
     "https://api.flightsearch.com/flights",
-    mockSearchParams
+    searchParams
   );
-
   if (error) return <p>Network Error</p>;
   if (loading) return <p>Loading...</p>;
   return (

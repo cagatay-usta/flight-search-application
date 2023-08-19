@@ -1,15 +1,12 @@
-import FlightDisplay from "./Components/FlightDisplay";
-import SearchBox from "./Components/SearchBox";
-import {SearchContextProvider} from "./Contexts/SearchContext";
+
+import { SearchContextProvider } from "./Contexts/SearchContext";
+import Home from "./Pages/Home";
 
 function App() {
   return (
     <>
       <SearchContextProvider>
-        <main>
-          <SearchBox />
-          <FlightDisplay />
-        </main>
+        <Home />
       </SearchContextProvider>
     </>
   );

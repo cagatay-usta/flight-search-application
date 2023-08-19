@@ -23,6 +23,7 @@ function AutoComplete({ id }: AutoCompleteProps) {
     setValue(item);
     setSuggestions([]);
     setValidationError(null);
+    handleDestination(item, id);
   }
 
   function handleValidation(value: string) {

@@ -22,6 +22,8 @@ type SearchContext = {
   dates: Dates;
   handleDestination: (destination: string, label: string) => void;
   handleDates: (date: Date | undefined, label: string) => void;
+  displayFlights: boolean;
+  handleFlightDisplay: () => void;
 };
 
 const SearchContext = createContext({} as SearchContext);
@@ -35,8 +37,6 @@ export function SearchContextProvider({ children }: SearchProviderProps) {
     from: "",
     to: "",
   });
-  const [dates, setDates] = useState<Dates>({ depart: new Date() });
-  const [oneWay, setOneWay] = useState(false);
 
   function handleDestination(destination: string, label: string) {
     setDestination((prevState) => {
@@ -44,11 +44,24 @@ export function SearchContextProvider({ children }: SearchProviderProps) {
     });
   }
 
+  const [dates, setDates] = useState<Dates>({ depart: new Date() });
+  const [oneWay, setOneWay] = useState(false);
+
   function handleDates(date: Date | undefined, label: string) {
     setDates((prevState) => {
       return { ...prevState, [label]: date };
     });
   }
+
+  const [displayFlights, setDisplayFlights] = useState<boolean>(false);
+
+  function handleFlightDisplay() {
+    if (destination.from && destination.to) setDisplayFlights(true);
+    console.log(destination.from);
+    console.log(destination.to);
+    console.log(displayFlights);
+  }
+
   return (
     <SearchContext.Provider
       value={{
@@ -58,6 +71,8 @@ export function SearchContextProvider({ children }: SearchProviderProps) {
         handleDestination,
         dates,
         handleDates,
+        displayFlights,
+        handleFlightDisplay,
       }}
     >
       {children}

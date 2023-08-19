@@ -39,15 +39,15 @@ export function SearchContextProvider({ children }: SearchProviderProps) {
   const [oneWay, setOneWay] = useState(false);
 
   function handleDestination(destination: string, label: string) {
-      setDestination((prevState) => {
-        return {...prevState, [label]:destination}   
-      })
+    setDestination((prevState) => {
+      return { ...prevState, [label]: destination };
+    });
   }
 
   function handleDates(date: Date | undefined, label: string) {
     setDates((prevState) => {
-      return {...prevState, [label]:date}
-    })
+      return { ...prevState, [label]: date };
+    });
   }
   return (
     <SearchContext.Provider

@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const usd = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
@@ -8,4 +10,8 @@ export const formatTime = (totalMin: number) => {
   let minutes = `${totalMin % 60}`;
   if (minutes.length < 2) minutes = `0${minutes}`;
   return `${hours}:${minutes}`;
+};
+
+export const dateToString = (date: Date) => {
+  return format(date, "dd.MM.yyyy");
 };

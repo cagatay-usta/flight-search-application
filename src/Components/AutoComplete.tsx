@@ -52,7 +52,7 @@ function AutoComplete({ id }: AutoCompleteProps) {
   return (
     <div className="relative flex-grow flex-shrink">
       <div className="input-container flex-col flex ">
-        <label htmlFor={id} className="absolute left-[.4rem] capitalize">
+        <label htmlFor={id} className="absolute left-[.7rem] capitalize text-slate-400">
           {id}
         </label>
         <input

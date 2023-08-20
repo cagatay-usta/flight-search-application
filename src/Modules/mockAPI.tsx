@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import flight_data from "./FLIGHT_DATA.json";
 
-interface FlightData {
+export interface FlightData {
   flight_number: number;
   airline: string;
   departure_airport: string;

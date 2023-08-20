@@ -22,6 +22,7 @@ function DatePicker({ oneWay = false, label }: DateProps) {
 
   let border = "border-white";
   if (validationAlert.departBigger) border = "border-red-400";
+  if (oneWay) border = "border-slate-300"
 
   const handleDaySelect = (date: Date | undefined) => {
     handleDates(date, dateType);
@@ -37,7 +38,7 @@ function DatePicker({ oneWay = false, label }: DateProps) {
 
   return (
     <div className="input-container flex-col flex relative flex-grow flex-shrink min-w-[205px]">
-      <p className={`absolute left-[.4rem] ${oneWay && "text-slate-100"}`}>
+      <p className={`absolute left-[.7rem] ${oneWay && "text-slate-100"} text-slate-400`}>
         {label}
       </p>
       <p
@@ -54,7 +55,7 @@ function DatePicker({ oneWay = false, label }: DateProps) {
           onSelect={handleDaySelect}
           fromDate={dateType == "return" ? dates.depart : today}
           toDate={add(today, { years: 1 })}
-          className="absolute -left-48 top-16 bg-slate-500 text-white p-6 rounded-xl"
+          className="absolute -left-48 top-16 bg-slate-500 text-white p-6 rounded-xl z-10 shadow-xl "
         />
       )}
     </div>

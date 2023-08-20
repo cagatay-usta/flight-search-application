@@ -1,33 +1,38 @@
 import { useSearchContext } from "../Contexts/SearchContext";
 import { useMockFetch } from "../Modules/mockAPI";
-import { formatTime, usd } from "../Modules/utils";
+import { sortFlightData } from "../Modules/utils";
+import { useState } from "react";
+import FlightCard from "./FlightCard";
 
 function FlightDisplay() {
+  const [sort, setSort] = useState("date");
   const { searchParams } = useSearchContext();
 
   const { flightData, error, loading, match } = useMockFetch(
     "https://api.flightsearch.com/flights",
     searchParams
   );
+
   if (error) return <p>Network Error</p>;
   if (loading) return <p>Loading...</p>;
   return (
     <>
       <div>
-        {match && <p>{match}</p>}
-        {flightData?.map((flight) => {
-          return (
-            <ul key={flight.id} className="border border-slate-700">
-              <li>Airline: {flight.airline}</li>
-              <li>From: {flight.departure_airport}</li>
-              <li>To: {flight.arrival_airport}</li>
-              <li>Departure Date: {flight.departure_date}</li>
-              <li>Departure Time: {flight.departure_time}</li>
-              <li>Flight Duration: {formatTime(flight.duration)}</li>
-              <li>Price: {usd.format(flight.price)}</li>
-            </ul>
-          );
-        })}
+        {match && <p className="text-sky-800 p-5 font-semibold">{match}</p>}
+        <div className="selection-container flex gap-2 justify-end p-2">
+          <label htmlFor="sort">Sort by</label>
+          <select id="sort" onChange={(e) => setSort(e.target.value)}>
+            <option value="date">Departure Date</option>
+            <option value="price">Price</option>
+            <option value="duration">Flight duration</option>
+            <option value="time">Departure Time</option>
+          </select>
+        </div>
+        <div className="fligt-cards-container grid gap-3 p-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
+          {sortFlightData(flightData, sort)?.map((flight) => {
+            return <FlightCard flight={flight} />;
+          })}
+        </div>
       </div>
     </>
   );

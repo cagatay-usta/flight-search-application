@@ -3,7 +3,7 @@
 # Flight Search Application
 
 ## Introduction
-Flight Search is a front-end project built with React, Tailwind and Vite. Its main aim is to give users the power to search for flights based on a range of criteria and view the resulting flight options.
+Flight Search is a front-end project built with TypeScript, React, Tailwind and Vite. Its main aim is to give users the power to search for flights based on a range of criteria and view the resulting flight options.
 
 [Check out live demo by clicking here.](https://cagatay-usta.github.io/flight-search-application/)
 
@@ -59,7 +59,7 @@ To run the Flight Search Application locally instead:
 
 - ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 
-- ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+- ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 
 - ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 

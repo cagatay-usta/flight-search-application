@@ -130,7 +130,7 @@ export function SearchContextProvider({ children }: SearchProviderProps) {
     setValidationAlert((prevState) => {
       return { ...prevState, samePort: false };
     });
-    if (dates.return && dates.return.getTime() < dates.depart.getTime()) {
+    if (!oneWay && dates.return && dates.return.getTime() < dates.depart.getTime()) {
       setValidationAlert((prevState) => {
         return { ...prevState, departBigger: true };
       });

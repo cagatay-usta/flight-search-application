@@ -1,6 +1,6 @@
 
 
-# Flight Search Application Documentation
+# Flight Search Application
 
 ## Introduction
 Flight Search is a front-end project built with React, Tailwind and Vite. Its main aim is to give users the power to search for flights based on a range of criteria and view the resulting flight options.

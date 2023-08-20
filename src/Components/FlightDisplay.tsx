@@ -3,6 +3,7 @@ import { useMockFetch } from "../Modules/mockAPI";
 import { sortFlightData } from "../Modules/utils";
 import { useState } from "react";
 import FlightCard from "./FlightCard";
+import { GridLoader } from "react-spinners";
 
 function FlightDisplay() {
   const [sort, setSort] = useState("date");
@@ -14,7 +15,12 @@ function FlightDisplay() {
   );
 
   if (error) return <p>Network Error</p>;
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center mt-12">
+        <GridLoader color="#36d7b7" />
+      </div>
+    );
   return (
     <>
       <div>
@@ -30,7 +36,7 @@ function FlightDisplay() {
         </div>
         <div className="fligt-cards-container grid gap-3 p-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
           {sortFlightData(flightData, sort)?.map((flight) => {
-            return <FlightCard flight={flight} />;
+            return <FlightCard flight={flight} key={flight.id} />;
           })}
         </div>
       </div>

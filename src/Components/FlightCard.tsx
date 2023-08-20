@@ -9,7 +9,6 @@ function FlightCard({ flight }: FlightProps) {
   return (
     <div className="card">
       <ul
-        key={flight.id}
         className="relative flex flex-col gap-4 border-2 border-sky-600 rounded overflow-hidden shadow-lg transition-shadow duration-500 hover:shadow-xl p-6"
       >
         <li className="absolute text-gray-400 self-end">{flight.departure_date}</li>

@@ -41,7 +41,7 @@ You can [preview live demo here](https://cagatay-usta.github.io/flight-search-ap
 
 To run the Flight Search Application locally instead:
 
-1. Clone the repository from GitHub: `git clone https://github.com/your-username/flight-search-app.git`
+1. Clone the repository from GitHub: `git clone https://github.com/cagatay-usta/flight-search-application.git`
 2. Navigate to the project directory: `cd flight-search-app`
 3. Install the necessary dependencies: `npm install`
 4. Start the development server: `npm run dev`
